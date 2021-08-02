@@ -117,20 +117,20 @@ public class ConfigMenu {
 	public Menu godfather() {
 		Menu men = new Menu();
 		men.setName("Godfather's Pizza");
-		men.addPizza(margherita());
-		men.addPizza(hawaian());
-		men.addPizza(salamiPizza());
-		men.addTopping(cheese());
-		men.addTopping(ham());
-		men.addTopping(onions());
-		men.addTopping(pineapple());
-		men.addTopping(salami());
-		men.addTopping(maxi());
-		men.addDrink(lemonade());
-		men.addDrink(water());
-		men.addDrink(wine());
-		men.addFranchise(shirt());
-		men.addFranchise(mug());
+		men.add(margherita());
+		men.add(hawaian());
+		men.add(salamiPizza());
+		men.add(cheese());
+		men.add(ham());
+		men.add(onions());
+		men.add(pineapple());
+		men.add(salami());
+		men.add(maxi());
+		men.add(lemonade());
+		men.add(water());
+		men.add(wine());
+		men.add(shirt());
+		men.add(mug());
 
 		return men;
 	}

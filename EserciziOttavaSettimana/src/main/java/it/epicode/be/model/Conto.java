@@ -3,29 +3,22 @@ package it.epicode.be.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Menu {
-	private String name;
+public class Conto {
+	private String codiceTavolo;
 	List<Pizza> pizze = new ArrayList<>();
-	List<Topping> toppings = new ArrayList<>();
 	List<Drink> drinks = new ArrayList<>();
 	List<Franchise> franchises = new ArrayList<>();
-
 	
-	
-	public String getName() {
-		return name;
+	public Conto(String codiceTavolo) {
+		this.codiceTavolo = codiceTavolo;
 	}
-
-	public void setName(String name) {
-		this.name = name;
+	
+	public String getCodiceTavolo() {
+		return codiceTavolo;
 	}
 
 	public void add(Pizza pizza) {
 		pizze.add(pizza);
-	}
-
-	public void add(Topping topping) {
-		toppings.add(topping);
 	}
 
 	public void add(Drink drink) {
@@ -35,18 +28,36 @@ public class Menu {
 	public void add(Franchise franchise) {
 		franchises.add(franchise);
 	}
-
+	
+	private double getTotalePizze() {
+		double totale = 0;
+		for (Pizza piz : pizze) {
+			totale += piz.getPrice();
+		}
+		return totale;
+	}
+	private double getTotaleDrinks() {
+		double totale = 0;
+		for (Drink dri : drinks) {
+			totale += dri.getPrice();
+		}
+		return totale;
+	}
+	private double getTotaleFranchises() {
+		double totale = 0;
+		for (Franchise fra : franchises) {
+			totale += fra.getPrice();
+		}
+		return totale;
+	}
+	private double getTotale() {
+		return Math.round((getTotalePizze() +getTotaleDrinks()+getTotaleFranchises())*100)/100.0;
+	}
+	
 	public void stampaPizze() {
 		System.out.println("PIZZE\t\tCal\tPREZZO\tINGREDIENTI");
 		for (Pizza piz : pizze) {
 			System.out.println(piz.stampa());
-		}
-	}
-
-	public void stampaTopping() {
-		System.out.println("TOPPINGS\tCal\tPREZZO");
-		for (Topping top : toppings) {
-			System.out.println(top.stampa());
 		}
 	}
 
@@ -63,12 +74,13 @@ public class Menu {
 			System.out.println(fra.stampa());
 		}
 	}
-
-	public void stampaMenu() {
-		System.out.println("\t\t\t" + getName());
+	
+	public void stampa() {
+		System.out.println("Codice Tavolo:\t" + getCodiceTavolo());
 		stampaPizze();
-		stampaTopping();
 		stampaDrink();
 		stampaFranchise();
+		System.out.println("TOTALE:\t\t\t" + getTotale());
 	}
+	
 }
