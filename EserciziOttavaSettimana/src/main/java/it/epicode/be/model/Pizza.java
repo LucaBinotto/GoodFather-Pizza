@@ -1,8 +1,10 @@
 package it.epicode.be.model;
 
-public class Pizza {
+public interface Pizza {
 
-	private long id;
-	private double prezzo;
-	private int calories;
+	public String getTopping();
+	
+	public double getPrice();
+	
+	public int getCalories();
 }
