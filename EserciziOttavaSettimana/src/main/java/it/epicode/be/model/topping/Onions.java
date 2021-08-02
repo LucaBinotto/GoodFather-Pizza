@@ -23,7 +23,11 @@ public class Onions extends Topping{
 	}
 	@Override
 	public int getCalories() {
-		return tempPizza.getCalories() + 22;
+		if (calorie == 0) {
+			return tempPizza.getCalories() + 22;
+		} else {
+			return calorie;
+		}
 	}
 
 }

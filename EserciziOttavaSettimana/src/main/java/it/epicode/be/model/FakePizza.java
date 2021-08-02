@@ -35,4 +35,9 @@ public class FakePizza implements Pizza {
 	public void setName(String name) {		
 	}
 
+	@Override
+	public void setCalories(int calorie) {
+		
+	}
+
 }

@@ -5,17 +5,18 @@ public abstract class Topping implements Pizza {
 	protected Pizza tempPizza;
 	protected double price = 0;
 	protected String name = "";
-
+	protected int calorie = 0;
+	
 	public Topping(Pizza pizza) {
 		tempPizza = pizza;
 
 	}
-
+	@Override
 	public String getTopping() {
 
 		return tempPizza.getTopping();
 	}
-
+	@Override
 	public double getPrice() {
 		if (price == 0) {
 			return tempPizza.getPrice();
@@ -23,9 +24,18 @@ public abstract class Topping implements Pizza {
 			return price;
 		}
 	}
-
+	@Override
+	public void setCalories(int calorie) {
+		this.calorie=calorie;
+	}
+	@Override
 	public int getCalories() {
-		return tempPizza.getCalories();
+		if (calorie == 0) {
+			return tempPizza.getCalories();
+		} else {
+			return calorie;
+		}
+		
 	}
 
 	@Override

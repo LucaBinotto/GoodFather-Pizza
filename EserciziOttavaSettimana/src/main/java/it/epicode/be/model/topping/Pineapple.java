@@ -23,7 +23,11 @@ public class Pineapple extends Topping{
 	}
 	@Override
 	public int getCalories() {
-		return tempPizza.getCalories() + 24;
+		if (calorie == 0) {
+			return tempPizza.getCalories() + 24;
+		} else {
+			return calorie;
+		}
 	}
 	
 }

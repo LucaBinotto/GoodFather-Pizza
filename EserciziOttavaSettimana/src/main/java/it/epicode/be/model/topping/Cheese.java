@@ -26,7 +26,11 @@ public class Cheese extends Topping {
 
 	@Override
 	public int getCalories() {
-		return tempPizza.getCalories() + 92;
+		if (calorie == 0) {
+			return tempPizza.getCalories() + 92;
+		} else {
+			return calorie;
+		}
 	}
 
 }

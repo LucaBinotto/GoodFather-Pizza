@@ -8,6 +8,8 @@ public interface Pizza {
 	
 	public void setPrice(double price);
 	
+	public void setCalories(int calorie);
+	
 	public int getCalories();
 	
 	public String stampa();

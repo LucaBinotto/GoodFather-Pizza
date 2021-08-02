@@ -23,7 +23,11 @@ public class Salami extends Topping{
 	}
 	@Override
 	public int getCalories() {
-		return tempPizza.getCalories() + 86;
+		if (calorie == 0) {
+			return tempPizza.getCalories() + 86;
+		} else {
+			return calorie;
+		}
 	}
 	
 }

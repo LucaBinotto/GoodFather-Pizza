@@ -19,7 +19,7 @@ public class Franchise {
 	}
 
 	public String stampa() {
-		return getName() +"\t\t\t\t\t" + getPrice();
+		return getName() +"\t\t\t" + getPrice();
 	}
 	
 }

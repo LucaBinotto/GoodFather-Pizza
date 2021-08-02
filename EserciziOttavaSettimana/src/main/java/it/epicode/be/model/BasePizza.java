@@ -40,4 +40,9 @@ public class BasePizza implements Pizza {
 		this.price = price;
 	}
 
+	@Override
+	public void setCalories(int calorie) {
+		
+	}
+
 }

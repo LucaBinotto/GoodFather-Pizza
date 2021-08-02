@@ -24,7 +24,11 @@ public class Ham extends Topping{
 	}
 	@Override
 	public int getCalories() {
-		return tempPizza.getCalories() + 35;
+		if (calorie == 0) {
+			return tempPizza.getCalories() + 35;
+		} else {
+			return calorie;
+		}
 	}
 
 

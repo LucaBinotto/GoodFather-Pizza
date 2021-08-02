@@ -23,6 +23,7 @@ public class ConfigMenu {
 		Pizza a = new Pineapple(new Ham(new Cheese(new BasePizza())));
 		a.setName("Hawaian Pizza:\t");
 		a.setPrice(6.49);
+		a.setCalories(1024);
 		return a;
 	}
 	@Bean
@@ -30,6 +31,7 @@ public class ConfigMenu {
 		Pizza a = new Salami(new Cheese(new BasePizza()));
 		a.setName("Salami Pizza:\t");
 		a.setPrice(5.99);
+		a.setCalories(1160);
 		return a;
 	}
 	@Bean
@@ -97,4 +99,40 @@ public class ConfigMenu {
 		a.setName("Family Size:\t");
 		return a;
 	}
+	@Bean
+	public Franchise shirt() {
+		Franchise a = new Franchise();
+		a.setName("Shirt");
+		a.setPrice(21.99);
+		return a;
+	}
+	@Bean
+	public Franchise mug() {
+		Franchise a = new Franchise();
+		a.setName("Mug");
+		a.setPrice(4.99);
+		return a;
+	}
+	@Bean
+	public Menu godfather() {
+		Menu men = new Menu();
+		men.setName("Godfather's Pizza");
+		men.addPizza(margherita());
+		men.addPizza(hawaian());
+		men.addPizza(salamiPizza());
+		men.addTopping(cheese());
+		men.addTopping(ham());
+		men.addTopping(onions());
+		men.addTopping(pineapple());
+		men.addTopping(salami());
+		men.addTopping(maxi());
+		men.addDrink(lemonade());
+		men.addDrink(water());
+		men.addDrink(wine());
+		men.addFranchise(shirt());
+		men.addFranchise(mug());
+
+		return men;
+	}
+	
 }
