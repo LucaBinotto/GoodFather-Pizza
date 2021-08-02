@@ -1,17 +1,18 @@
 package it.epicode.be.model;
 
-public abstract class ToppingDecorator implements Pizza {
-
+public abstract class Topping implements Pizza {
+	protected String topping;
 	protected Pizza tempPizza;
 	protected double price = 0;
-	protected String name ="";
+	protected String name = "";
 
-	public ToppingDecorator(Pizza pizza) {
+	public Topping(Pizza pizza) {
 		tempPizza = pizza;
 
 	}
 
 	public String getTopping() {
+
 		return tempPizza.getTopping();
 	}
 
@@ -29,7 +30,18 @@ public abstract class ToppingDecorator implements Pizza {
 
 	@Override
 	public String stampa() {
-		return getName() + getCalories() + "\t" + getPrice() + "\t" + "(" + getTopping() + ")";
+		if (!getTopping().contains("fake")) {
+			return getName() + getCalories() + "\t" + getPrice() + "\t" + "(" + getTopping() + ")";
+		} else {
+			if (getCalories()==-1) {
+				return getName() + "x 1.95" + "\t" + getPrice() + "\t";
+
+			}else {
+				return getName() + getCalories() + "\t" + getPrice() + "\t";
+
+			}
+
+		}
 	}
 
 	@Override

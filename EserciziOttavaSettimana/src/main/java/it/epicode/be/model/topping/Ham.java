@@ -1,9 +1,9 @@
 package it.epicode.be.model.topping;
 
 import it.epicode.be.model.Pizza;
-import it.epicode.be.model.ToppingDecorator;
+import it.epicode.be.model.Topping;
 
-public class Ham extends ToppingDecorator{
+public class Ham extends Topping{
 
 	public Ham(Pizza pizza) {
 		super(pizza);

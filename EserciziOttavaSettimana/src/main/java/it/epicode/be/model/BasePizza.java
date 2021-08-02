@@ -3,7 +3,7 @@ package it.epicode.be.model;
 public class BasePizza implements Pizza {
 
 	private double price = 4.30;
-	private String name = "Base con pomodoro: ";
+	private String name = "Base pomodoro:\t";
 
 	@Override
 	public String getTopping() {
