@@ -6,5 +6,15 @@ public interface Pizza {
 	
 	public double getPrice();
 	
+	public void setPrice(double price);
+	
 	public int getCalories();
+	
+	public String stampa();
+	
+	public String getName();
+	
+	public void setName(String name);
+	
+	
 }

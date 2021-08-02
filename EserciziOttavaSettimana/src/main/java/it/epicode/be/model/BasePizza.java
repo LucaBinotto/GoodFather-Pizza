@@ -2,6 +2,9 @@ package it.epicode.be.model;
 
 public class BasePizza implements Pizza {
 
+	private double price = 4.30;
+	private String name = "Base con pomodoro: ";
+
 	@Override
 	public String getTopping() {
 		return "tomato";
@@ -9,13 +12,32 @@ public class BasePizza implements Pizza {
 
 	@Override
 	public double getPrice() {
-		return 4.30;
+		return price;
 	}
 
 	@Override
 	public int getCalories() {
 		return 1012;
 	}
-	
+
+	@Override
+	public String stampa() {
+		return getName() + getCalories() + "\t" + getPrice() + "\t" + "(" + getTopping() + ")";
+	}
+
+	@Override
+	public String getName() {
+		return name;
+	}
+
+	@Override
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	@Override
+	public void setPrice(double price) {
+		this.price = price;
+	}
 
 }

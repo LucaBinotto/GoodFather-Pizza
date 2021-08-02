@@ -3,29 +3,27 @@ package it.epicode.be.model.topping;
 import it.epicode.be.model.Pizza;
 import it.epicode.be.model.ToppingDecorator;
 
-public class Ham extends ToppingDecorator{
+public class FamilySize extends ToppingDecorator{
 
-	public Ham(Pizza pizza) {
+	public FamilySize(Pizza pizza) {
 		super(pizza);
 	}
 
 	@Override
 	public String getTopping() {
-		return tempPizza.getTopping() + ", ham";
+		return tempPizza.getTopping() + "";
 	}
 	@Override
 	public double getPrice() {
 		if (price == 0) {
-			return Math.round((tempPizza.getPrice() + 0.99)*100)/100.0;
+			return Math.round((tempPizza.getPrice() + 4.15)*100)/100.0;
 		} else {
 			return price;
 		}
-		
 	}
 	@Override
 	public int getCalories() {
-		return tempPizza.getCalories() + 35;
+		return (int)Math.round((tempPizza.getCalories() * 1.95));
 	}
-
 
 }

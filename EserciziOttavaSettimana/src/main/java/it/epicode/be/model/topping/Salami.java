@@ -15,11 +15,15 @@ public class Salami extends ToppingDecorator{
 	}
 	@Override
 	public double getPrice() {
-		return tempPizza.getPrice() + 0.99;
+		if (price == 0) {
+			return Math.round((tempPizza.getPrice() + 0.99)*100)/100.0;
+		} else {
+			return price;
+		}
 	}
 	@Override
 	public int getCalories() {
 		return tempPizza.getCalories() + 86;
 	}
-
+	
 }
