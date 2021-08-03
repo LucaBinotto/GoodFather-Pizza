@@ -83,13 +83,12 @@ public class Conto {
 			}
 		}
 	}
-
 	public void stampa() {
-		System.out.println("Codice Tavolo:\t" + getCodiceTavolo());
+		System.out.println("\n\t\t\tORDINE\nCodice Tavolo:\t" + getCodiceTavolo());
 		stampaPizze();
 		stampaDrink();
 		stampaFranchise();
-		System.out.println("\nTOTALE:\t\t\t" + getTotale());
+		System.out.println("\nTOTALE:\t\t\t" + "\u20ac"+getTotale());
 	}
 
 }

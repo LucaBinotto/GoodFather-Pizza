@@ -41,13 +41,13 @@ public abstract class Topping implements Pizza {
 	@Override
 	public String stampa() {
 		if (!getTopping().contains("fake")) {
-			return getName() + getCalories() + "\t" + getPrice() + "\t" + "(" + getTopping() + ")";
+			return getName() + getCalories() + "\t" + "\u20ac"+getPrice() + "\t" + "(" + getTopping() + ")";
 		} else {
 			if (getCalories()==-1) {
-				return getName() + "x 1.95" + "\t" + getPrice() + "\t";
+				return getName() + "x 1.95" + "\t" + "\u20ac"+getPrice() + "\t";
 
 			}else {
-				return getName() + getCalories() + "\t" + getPrice() + "\t";
+				return getName() + getCalories() + "\t" + "\u20ac"+getPrice() + "\t";
 
 			}
 

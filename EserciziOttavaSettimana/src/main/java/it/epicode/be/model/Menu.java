@@ -10,8 +10,6 @@ public class Menu {
 	List<Drink> drinks = new ArrayList<>();
 	List<Franchise> franchises = new ArrayList<>();
 
-	
-	
 	public String getName() {
 		return name;
 	}

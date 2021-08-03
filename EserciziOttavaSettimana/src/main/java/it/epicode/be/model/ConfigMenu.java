@@ -1,5 +1,7 @@
 package it.epicode.be.model;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -12,6 +14,11 @@ import it.epicode.be.model.topping.Salami;
 
 @Configuration
 public class ConfigMenu {
+	
+	@Autowired
+	private ApplicationContext context;
+	
+	
 	@Bean
 	public Pizza margherita() {
 		Pizza a =  new Cheese(new BasePizza());
@@ -133,6 +140,18 @@ public class ConfigMenu {
 		men.add(mug());
 
 		return men;
+	}
+	
+	@Bean
+	public Conto solito() {
+		Conto f4 = new Conto("F4");
+		f4.add((Drink)context.getBean("water"));
+		f4.add((Drink)context.getBean("wine"));
+		f4.add((Pizza)context.getBean("margherita"));
+		f4.add(new FamilySize(new Pineapple(new Cheese(new Ham(new Onions( new Salami(new BasePizza())))))));
+		f4.add((Franchise)context.getBean("mug"));
+		f4.add((Franchise)context.getBean("shirt"));
+		return f4;
 	}
 	
 }

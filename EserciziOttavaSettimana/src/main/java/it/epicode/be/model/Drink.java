@@ -39,6 +39,6 @@ public class Drink {
 	}
 
 	public String stampa() {
-		return getName() + "\t" + getCalories() + "\t" + getPrice() + "\t" + getDescription();
+		return getName() + "\t" + getCalories() + "\t" + "\u20ac"+getPrice() + "\t" + getDescription();
 	}
 }
