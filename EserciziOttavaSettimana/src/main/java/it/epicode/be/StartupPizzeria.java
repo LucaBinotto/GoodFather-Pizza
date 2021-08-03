@@ -6,7 +6,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
 import it.epicode.be.model.BasePizza;
-import it.epicode.be.model.Conto;
+import it.epicode.be.model.Ordine;
 import it.epicode.be.model.Drink;
 import it.epicode.be.model.Franchise;
 import it.epicode.be.model.Menu;
@@ -26,7 +26,7 @@ public class StartupPizzeria implements CommandLineRunner{
 	@Autowired
 	private Menu godfather;
 	@Autowired
-	private Conto f4;
+	private Ordine f4;
 	
 	
 	@Override

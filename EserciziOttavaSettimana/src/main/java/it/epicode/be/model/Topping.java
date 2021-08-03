@@ -57,7 +57,7 @@ public abstract class Topping implements Pizza {
 	@Override
 	public String getName() {
 		if (name.equals("")) {
-			return "Personalizzata: ";
+			return "Personalizzata:\t";
 		} else {
 			return name;
 		}

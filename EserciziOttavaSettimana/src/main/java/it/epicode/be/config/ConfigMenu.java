@@ -1,10 +1,19 @@
-package it.epicode.be.model;
+package it.epicode.be.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import it.epicode.be.model.BasePizza;
+import it.epicode.be.model.Ordine;
+import it.epicode.be.model.Drink;
+import it.epicode.be.model.FakePizza;
+import it.epicode.be.model.Franchise;
+import it.epicode.be.model.Menu;
+import it.epicode.be.model.Pizza;
+import it.epicode.be.model.Tavolo;
+import it.epicode.be.model.Topping;
 import it.epicode.be.model.topping.Cheese;
 import it.epicode.be.model.topping.FamilySize;
 import it.epicode.be.model.topping.Ham;
@@ -22,7 +31,7 @@ public class ConfigMenu {
 	@Bean
 	public Pizza margherita() {
 		Pizza a =  new Cheese(new BasePizza());
-		a.setName("Margherita:\t");
+		a.setName("Margherita:\t\t");
 		return a;
 	}
 	@Bean
@@ -143,11 +152,11 @@ public class ConfigMenu {
 	}
 	
 	@Bean
-	public Conto solito() {
-		Conto f4 = new Conto("F4");
+	public Ordine solito() {
+		Ordine f4 = new Ordine((Tavolo)context.getBean("f4"));
 		f4.add((Drink)context.getBean("water"));
 		f4.add((Drink)context.getBean("wine"));
-		f4.add((Pizza)context.getBean("margherita"));
+		f4.add((Pizza)context.getBean("margherita"), "Merda liquida");
 		f4.add(new FamilySize(new Pineapple(new Cheese(new Ham(new Onions( new Salami(new BasePizza())))))));
 		f4.add((Franchise)context.getBean("mug"));
 		f4.add((Franchise)context.getBean("shirt"));
