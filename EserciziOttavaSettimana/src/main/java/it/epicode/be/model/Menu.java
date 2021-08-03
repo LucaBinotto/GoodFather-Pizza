@@ -36,29 +36,29 @@ public class Menu {
 		franchises.add(franchise);
 	}
 
-	public void stampaPizze() {
-		System.out.println("PIZZE\t\tCal\tPREZZO\tINGREDIENTI");
+	private void stampaPizze() {
+		System.out.println("\nPIZZE\t\tCal\tPREZZO\tINGREDIENTI");
 		for (Pizza piz : pizze) {
 			System.out.println(piz.stampa());
 		}
 	}
 
-	public void stampaTopping() {
-		System.out.println("TOPPINGS\tCal\tPREZZO");
+	private void stampaTopping() {
+		System.out.println("\nTOPPINGS\tCal\tPREZZO");
 		for (Topping top : toppings) {
 			System.out.println(top.stampa());
 		}
 	}
 
-	public void stampaDrink() {
-		System.out.println("DRINKS\t\tCal\tPREZZO\t");
+	private void stampaDrink() {
+		System.out.println("\nDRINKS\t\tCal\tPREZZO\t");
 		for (Drink dri : drinks) {
 			System.out.println(dri.stampa());
 		}
 	}
 
-	public void stampaFranchise() {
-		System.out.println("FRANCHISE\t\tPREZZO");
+	private void stampaFranchise() {
+		System.out.println("\nFRANCHISE\t\tPREZZO");
 		for (Franchise fra : franchises) {
 			System.out.println(fra.stampa());
 		}

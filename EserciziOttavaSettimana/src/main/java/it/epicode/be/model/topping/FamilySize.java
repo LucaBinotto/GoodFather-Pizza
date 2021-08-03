@@ -11,7 +11,7 @@ public class FamilySize extends Topping {
 
 	@Override
 	public String getTopping() {
-		return tempPizza.getTopping() + "";
+		return tempPizza.getTopping() + ", MAXI";
 	}
 
 	@Override

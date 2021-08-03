@@ -8,11 +8,11 @@ public class Conto {
 	List<Pizza> pizze = new ArrayList<>();
 	List<Drink> drinks = new ArrayList<>();
 	List<Franchise> franchises = new ArrayList<>();
-	
+
 	public Conto(String codiceTavolo) {
 		this.codiceTavolo = codiceTavolo;
 	}
-	
+
 	public String getCodiceTavolo() {
 		return codiceTavolo;
 	}
@@ -28,7 +28,7 @@ public class Conto {
 	public void add(Franchise franchise) {
 		franchises.add(franchise);
 	}
-	
+
 	private double getTotalePizze() {
 		double totale = 0;
 		for (Pizza piz : pizze) {
@@ -36,6 +36,7 @@ public class Conto {
 		}
 		return totale;
 	}
+
 	private double getTotaleDrinks() {
 		double totale = 0;
 		for (Drink dri : drinks) {
@@ -43,6 +44,7 @@ public class Conto {
 		}
 		return totale;
 	}
+
 	private double getTotaleFranchises() {
 		double totale = 0;
 		for (Franchise fra : franchises) {
@@ -50,37 +52,44 @@ public class Conto {
 		}
 		return totale;
 	}
+
 	private double getTotale() {
-		return Math.round((getTotalePizze() +getTotaleDrinks()+getTotaleFranchises())*100)/100.0;
+		return Math.round((getTotalePizze() + getTotaleDrinks() + getTotaleFranchises()) * 100) / 100.0;
 	}
-	
+
 	public void stampaPizze() {
-		System.out.println("PIZZE\t\tCal\tPREZZO\tINGREDIENTI");
-		for (Pizza piz : pizze) {
-			System.out.println(piz.stampa());
+		if (!pizze.isEmpty()) {
+			System.out.println("\nPIZZE\t\tCal\tPREZZO\tINGREDIENTI");
+			for (Pizza piz : pizze) {
+				System.out.println(piz.stampa());
+			}
 		}
 	}
 
 	public void stampaDrink() {
-		System.out.println("DRINKS\t\tCal\tPREZZO\t");
-		for (Drink dri : drinks) {
-			System.out.println(dri.stampa());
+		if (!drinks.isEmpty()) {
+			System.out.println("\nDRINKS\t\tCal\tPREZZO\t");
+			for (Drink dri : drinks) {
+				System.out.println(dri.stampa());
+			}
 		}
 	}
 
 	public void stampaFranchise() {
-		System.out.println("FRANCHISE\t\tPREZZO");
-		for (Franchise fra : franchises) {
-			System.out.println(fra.stampa());
+		if (!franchises.isEmpty()) {
+			System.out.println("\nFRANCHISE\t\tPREZZO");
+			for (Franchise fra : franchises) {
+				System.out.println(fra.stampa());
+			}
 		}
 	}
-	
+
 	public void stampa() {
 		System.out.println("Codice Tavolo:\t" + getCodiceTavolo());
 		stampaPizze();
 		stampaDrink();
 		stampaFranchise();
-		System.out.println("TOTALE:\t\t\t" + getTotale());
+		System.out.println("\nTOTALE:\t\t\t" + getTotale());
 	}
-	
+
 }
