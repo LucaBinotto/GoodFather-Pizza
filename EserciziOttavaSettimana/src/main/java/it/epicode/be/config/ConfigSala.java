@@ -1,7 +1,5 @@
 package it.epicode.be.config;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -10,9 +8,7 @@ import it.epicode.be.model.Tavolo.Stato;
 
 @Configuration
 public class ConfigSala {
-	@Autowired
-	private ApplicationContext context;
-	
+		
 	@Bean
 	public Tavolo f1() {
 		Tavolo tav = new Tavolo();

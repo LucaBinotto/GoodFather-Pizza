@@ -31,9 +31,8 @@ public class StartupPizzeria implements CommandLineRunner{
 	
 	@Override
 	public void run(String... args) throws Exception {
-//		Menu godfather = (Menu)context.getBean("godfather");
 		godfather.stampaMenu();
-
+		System.out.println();
 		f4.stampa();
 	}
 

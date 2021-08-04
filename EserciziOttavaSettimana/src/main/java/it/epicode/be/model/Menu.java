@@ -3,12 +3,17 @@ package it.epicode.be.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class Menu {
+	Logger menLog = LoggerFactory.getLogger(Menu.class);
+	
 	private String name;
-	List<Pizza> pizze = new ArrayList<>();
-	List<Topping> toppings = new ArrayList<>();
-	List<Drink> drinks = new ArrayList<>();
-	List<Franchise> franchises = new ArrayList<>();
+	List<MenuItem> pizze = new ArrayList<>();
+	List<MenuItem> toppings = new ArrayList<>();
+	List<MenuItem> drinks = new ArrayList<>();
+	List<MenuItem> franchises = new ArrayList<>();
 
 	public String getName() {
 		return name;
@@ -35,35 +40,35 @@ public class Menu {
 	}
 
 	private void stampaPizze() {
-		System.out.println("\nPIZZE\t\tCal\tPREZZO\tINGREDIENTI");
-		for (Pizza piz : pizze) {
-			System.out.println(piz.stampa());
+		menLog.info("PIZZE                    Cal       PREZZO\tINGREDIENTI");
+		for (MenuItem piz : pizze) {
+			menLog.info(piz.stampa());
 		}
 	}
 
 	private void stampaTopping() {
-		System.out.println("\nTOPPINGS\tCal\tPREZZO");
-		for (Topping top : toppings) {
-			System.out.println(top.stampa());
+		menLog.info("TOPPINGS                 Cal       PREZZO");
+		for (MenuItem top : toppings) {
+			menLog.info(top.stampa());
 		}
 	}
 
 	private void stampaDrink() {
-		System.out.println("\nDRINKS\t\tCal\tPREZZO\t");
-		for (Drink dri : drinks) {
-			System.out.println(dri.stampa());
+		menLog.info("DRINKS                   Cal       PREZZO");
+		for (MenuItem dri : drinks) {
+			menLog.info(dri.stampa());
 		}
 	}
 
 	private void stampaFranchise() {
-		System.out.println("\nFRANCHISE\t\tPREZZO");
-		for (Franchise fra : franchises) {
-			System.out.println(fra.stampa());
+		menLog.info("FRANCHISE                          PREZZO");
+		for (MenuItem fra : franchises) {
+			menLog.info(fra.stampa());
 		}
 	}
 
 	public void stampaMenu() {
-		System.out.println("\t\t\t" + getName());
+		menLog.info("\t\t" + getName());
 		stampaPizze();
 		stampaTopping();
 		stampaDrink();
