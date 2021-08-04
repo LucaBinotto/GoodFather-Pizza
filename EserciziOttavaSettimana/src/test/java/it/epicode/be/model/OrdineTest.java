@@ -2,17 +2,30 @@ package it.epicode.be.model;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
+import java.util.Map;
+
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
+
+import it.epicode.be.model.Ordine.Stato;
+import it.epicode.be.model.topping.Cheese;
 
 class OrdineTest {
-	@Autowired
-	ApplicationContext con;
+	private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
+	Ordine ord;
+	Tavolo tav;
+	Pizza piz;
+	Drink dri;
+	Franchise fra;
+
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
 	}
@@ -23,6 +36,12 @@ class OrdineTest {
 
 	@BeforeEach
 	void setUp() throws Exception {
+	    System.setOut(new PrintStream(outputStreamCaptor));
+		tav = new Tavolo();
+		ord = new Ordine(tav);
+		piz = new Cheese(new BasePizza());
+		dri = new Drink();
+		fra = new Franchise();
 	}
 
 	@AfterEach
@@ -31,77 +50,99 @@ class OrdineTest {
 
 	@Test
 	void testOrdine() {
-		assertEquals(Ordine.class, new Ordine((Tavolo)con.getBean("t1")));
+		assertEquals(Ordine.class, (ord.getClass()));
 	}
 
 	@Test
 	void testGetCodiceTavolo() {
-		fail("Not yet implemented"); // TODO
+		tav.setCodiceTavolo("ABC");
+		assertEquals("ABC", tav.getCodiceTavolo());
 	}
 
 	@Test
 	void testAddPizza() {
-		fail("Not yet implemented"); // TODO
+		ord.add(piz);
+		Map<MenuItem, String> a = ord.getPizze();
+		assertTrue(a.containsKey(piz));
 	}
 
 	@Test
 	void testAddPizzaString() {
-		fail("Not yet implemented"); // TODO
+		ord.add(piz, "prova");
+		Map<MenuItem, String> a = ord.getPizze();
+		assertTrue(a.containsKey(piz));
+		assertEquals("prova", a.get(piz));
 	}
 
 	@Test
 	void testAddDrink() {
-		fail("Not yet implemented"); // TODO
+		ord.add(dri);
+		Map<MenuItem, String> a = ord.getDrinks();
+		assertTrue(a.containsKey(dri));
 	}
 
 	@Test
 	void testAddDrinkString() {
-		fail("Not yet implemented"); // TODO
+		ord.add(dri, "prova");
+		Map<MenuItem, String> a = ord.getDrinks();
+		assertTrue(a.containsKey(dri));
+		assertEquals("prova", a.get(dri));
 	}
 
 	@Test
 	void testAddFranchise() {
-		fail("Not yet implemented"); // TODO
+		ord.add(fra);
+		Map<MenuItem, String> a = ord.getFranchises();
+		assertTrue(a.containsKey(fra));
 	}
 
 	@Test
 	void testAddFranchiseString() {
-		fail("Not yet implemented"); // TODO
+		ord.add(fra, "prova");
+		Map<MenuItem, String> a = ord.getFranchises();
+		assertTrue(a.containsKey(fra));
+		assertEquals("prova", a.get(fra));
 	}
 
 	@Test
 	void testStampa() {
-		fail("Not yet implemented"); // TODO
+		ord.stampa();
+		Assertions.assertNotEquals("",outputStreamCaptor.toString().trim());
 	}
 
 	@Test
 	void testGetStato() {
-		fail("Not yet implemented"); // TODO
+		assertEquals(Stato.Aperto, ord.getStato());
 	}
 
 	@Test
 	void testSetStato() {
-		fail("Not yet implemented"); // TODO
+		ord.setStato(Stato.Servito);
+		assertEquals(Stato.Servito, ord.getStato());
+
 	}
 
 	@Test
 	void testGetCoperti() {
-		fail("Not yet implemented"); // TODO
+		assertEquals(1, ord.getCoperti());
 	}
 
 	@Test
 	void testSetCoperti() {
-		fail("Not yet implemented"); // TODO
+		ord.setCoperti(17);
+		assertEquals(17, ord.getCoperti());
 	}
 
 	@Test
 	void testGetOra() {
-		fail("Not yet implemented"); // TODO
+		assertEquals(LocalTime.now().truncatedTo(ChronoUnit.MINUTES), ord.getOra());
 	}
 
 	@Test
 	void testSetOra() {
-		fail("Not yet implemented"); // TODO
+		ord.setOra(LocalTime.of(15, 47));
+		assertEquals(LocalTime.of(15, 47), ord.getOra());
+
 	}
 
 }

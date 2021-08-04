@@ -139,4 +139,18 @@ public class Ordine {
 		this.ora = ora;
 	}
 
+	protected Map<MenuItem, String> getPizze() {
+		return pizze;
+	}
+
+	protected Map<MenuItem, String> getDrinks() {
+		return drinks;
+	}
+
+	protected Map<MenuItem, String> getFranchises() {
+		return franchises;
+	}
+
+	
+	
 }
