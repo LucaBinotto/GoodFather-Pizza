@@ -5,13 +5,9 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-
 import it.epicode.be.model.Menu;
+import it.epicode.be.model.Ordine.Stato;
 import it.epicode.be.model.RegistroOrdini;
 
 @Controller
@@ -40,38 +36,25 @@ private RegistroOrdini reg;
 		
 	@GetMapping("/getOrdine")
 	public String ordine(Map<String,Object> model,@RequestParam String codiceOrdine) {
+		if(Long.parseLong(codiceOrdine)<=reg.getOrdini().size()) {
 		model.put("reg", reg);
 		long codOrd = Long.parseLong(codiceOrdine);
 		model.put("co", codOrd);
 		return "ordine";
+		}else {
+			return "errorOrdine";
+		}
 	}
 	
-	@GetMapping("/hello1")
-	public @ResponseBody String helloName1(@RequestParam String name) {
-		return "Hello, "+name+" welcome to Hell";
+	
+	@GetMapping("/updateStato")
+	public String update(Map<String,Object> model,@RequestParam String stato,@RequestParam String codiceOrdine) {
+		model.put("reg", reg);
+		long codOrd = Long.parseLong(codiceOrdine);
+		reg.getOrdine(codOrd).setStato(Stato.valueOf(stato));
+		return "listaOrdini";
+		
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-//	<table>
-//	  <tr>
-//	    <th>NAME</th>
-//	    <th>PRICE</th>
-//	    <th>IN STOCK</th>
-//	  </tr>
-//	  <tr th:each="prod : ${prods}" th:class="${prodStat.odd}? 'odd'">
-//	    <td th:text="${prod.name}">Onions</td>
-//	    <td th:text="${prod.price}">2.41</td>
-//	    <td th:text="${prod.inStock}? #{true} : #{false}">yes</td>
-//	  </tr>
-//	</table>
-//	
-	
-	
-	
+		
 }

@@ -22,12 +22,32 @@
 	<body style="background-color: rgb(250, 189, 5)">
 		<h1>Godfather's Pizza</h1>
 		<h2>Ordine <span th:text="${reg.getOrdine(__${co}__).numeroOrdine}">d</span></h2>
-       <span th:text="${reg.getOrdine(__${co}__).numeroOrdine}">d</span>
-        <span th:text="${reg.getOrdine(__${co}__).tavolo.codiceTavolo}">d</span>
-         <span th:text="${reg.getOrdine(__${co}__).coperti}">d</span>
-          <span th:text="${reg.getOrdine(__${co}__).stato}">d</span>
-           <span th:text="${reg.getOrdine(__${co}__).getTotale()}">d</span>
-          
+                 
+    <table>
+      <tr>
+        <th>Ordine </th>
+        <th>Tavolo </th>
+        <th>Coperti</th>
+        <th>Stato  </th>
+        <th>Totale </th>
+        <th>Modifica </th>
+      </tr>
+	   <tr>
+        <td th:text="${reg.getOrdine(__${co}__).numeroOrdine}"></td>
+        <td th:text="${reg.getOrdine(__${co}__).tavolo.codiceTavolo}"></td>
+        <td th:text="${reg.getOrdine(__${co}__).coperti}"></td>
+        <td th:text="${reg.getOrdine(__${co}__).stato}"></td>
+        <td th:text="${reg.getOrdine(__${co}__).getTotale()}"></td>
+        <td >	<form action="updateStato" method = "get">
+        		<input type="radio" name="stato" value="Aperto" >Aperto
+        		<input type="radio" name="stato" value="Pronto" >Pronto
+				<input type="radio" name="stato" value="Servito">Servito
+				<input type="submit" value="Cambio"></td>
+				<input type="hidden" name="codiceOrdine" th:value="${reg.getOrdine(__${co}__).numeroOrdine}"></td>
+				</form>
+      </tr>
+    </table>      
+          <br>
    
  <a href="http://localhost:8080/home" class="button">HOME</a>
  
