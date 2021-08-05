@@ -1,0 +1,55 @@
+<html xmlns:th="https://www.thymeleaf.org">
+<style>
+	table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+  text-align: left;
+   background-color: rgb(255, 128, 0);
+}
+.button {
+  font: bold 11px Arial;
+  text-decoration: none;
+  background-color: #EEEEEE;
+  color: #333333;
+  padding: 2px 6px 2px 6px;
+  border-top: 1px solid #CCCCCC;
+  border-right: 1px solid #333333;
+  border-bottom: 1px solid #333333;
+  border-left: 1px solid #CCCCCC;
+}
+
+</style>
+	<body style="background-color: rgb(250, 189, 5)">
+		<h1>Godfather's Pizza</h1>
+		<h2>Ordini</h2>
+	<table>
+      <tr>
+        <th>Ordine</th>
+        <th>Tavolo</th>
+        <th>Stato</th>
+        <th>Data</th>
+        <th>Ora</th>
+      </tr>
+	   <tr th:each="ord : ${reg.getOrdini}">
+        <td th:text="${ord.getNumeroOrdine}"></td>
+        <td th:text="${ord.getTavolo.getCodiceTavolo}"></td>
+        <td th:text="${ord.getStato}"></td>
+        <td th:text="${ord.getData}"></td>
+        <td th:text="${ord.getOra}"></td>
+      </tr>
+    </table>
+    <br>
+     <br>
+      <br>
+       <br>
+     <form method="get" action="getOrdine" >
+     	<fieldset>
+			<input id ="rr" type="text" name="codiceOrdine" ><label for="rr">Ordine	</label><br>
+			<input type="submit" value="Conferma">
+		</fieldset>
+	</form>
+	
+	
+      <a href="http://localhost:8080/home" class="button">HOME</a>
+	</body>
+</html>

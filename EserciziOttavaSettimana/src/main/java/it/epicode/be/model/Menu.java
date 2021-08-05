@@ -8,12 +8,11 @@ import org.slf4j.LoggerFactory;
 
 import lombok.Getter;
 import lombok.Setter;
-
+@Getter
+@Setter
 public class Menu {
 	Logger menLog = LoggerFactory.getLogger(Menu.class);
 	
-	@Getter
-	@Setter
 	private String name;
 	private List<MenuItem> pizze = new ArrayList<>();
 	private List<MenuItem> toppings = new ArrayList<>();

@@ -1,0 +1,84 @@
+<html>
+
+<style>
+	table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+  text-align: left;
+   background-color: rgb(255, 128, 0);
+}
+.button {
+  font: bold 11px Arial;
+  text-decoration: none;
+  background-color: #EEEEEE;
+  color: #333333;
+  padding: 2px 6px 2px 6px;
+  border-top: 1px solid #CCCCCC;
+  border-right: 1px solid #333333;
+  border-bottom: 1px solid #333333;
+  border-left: 1px solid #CCCCCC;
+}
+
+</style>
+
+<body style="background-color: rgb(250, 189, 5)">
+
+    <h1>Menu</h1>
+    <h2 th:text="${menu.getName}"></h2>
+    
+     <table>
+      <tr>
+        <th>Pizza</th>
+        <th>Ingredienti</th>
+        <th>Calorie</th>
+        <th>Prezzo</th>
+      </tr>
+      <tr th:each="pizza : ${menu.getPizze}">
+        <td th:text="${pizza.getName}"></td>
+        <td th:text="${pizza.getTopping}"></td>
+        <td th:text="${pizza.getCaloriesSt}"></td>
+        <td th:text="${pizza.getPrice}"></td>
+      </tr>
+       <tr>
+        <th>Topping</th>
+        <th></th>
+        <th>Calorie</th>
+        <th>Prezzo</th>
+      </tr>
+      <tr th:each="topp : ${menu.getToppings}">
+        <td th:text="${topp.getName}"></td>
+        <td></td>
+        <td th:text="${topp.getCaloriesSt}"></td>
+        <td th:text="${topp.getPrice}"></td>
+      </tr>
+       <tr>
+        <th>Drink</th>
+        <th></th>
+        <th>Calorie</th>
+        <th>Prezzo</th>
+      </tr>
+      <tr th:each="dri : ${menu.getDrinks}">
+        <td th:text="${dri.getName}"></td>
+        <td th:text="${dri.getDescription}"></td>
+        <td th:text="${dri.getCaloriesSt}"></td>
+        <td th:text="${dri.getPrice}"></td>
+      </tr>
+       <tr>
+        <th>Merchandise</th>
+        <th></th>
+        <th></th>
+        <th>Prezzo</th>
+      </tr>
+      <tr th:each="fran : ${menu.getFranchises}">
+        <td th:text="${fran.getName}"></td>
+        <td></td>
+        <td></td>
+        <td th:text="${fran.getPrice}"></td>
+      </tr>
+    </table>
+     <br>
+    <a href="http://localhost:8080/home" class="button">HOME</a>
+    
+    
+</body>
+</html>

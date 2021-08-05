@@ -1,21 +1,18 @@
 package it.epicode.be.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
-
 import it.epicode.be.model.BasePizza;
-import it.epicode.be.model.Ordine;
-import it.epicode.be.model.Ordine.Stato;
 import it.epicode.be.model.Drink;
 import it.epicode.be.model.FakePizza;
 import it.epicode.be.model.Franchise;
 import it.epicode.be.model.MassaZenteException;
 import it.epicode.be.model.Menu;
+import it.epicode.be.model.Ordine;
+import it.epicode.be.model.Ordine.Stato;
 import it.epicode.be.model.Pizza;
 import it.epicode.be.model.Tavolo;
 import it.epicode.be.model.Topping;
@@ -25,17 +22,12 @@ import it.epicode.be.model.topping.Ham;
 import it.epicode.be.model.topping.Onions;
 import it.epicode.be.model.topping.Pineapple;
 import it.epicode.be.model.topping.Salami;
-import lombok.Getter;
 
 @Configuration
-@Component
 public class ConfigMenu {
 	
 	@Autowired
 	private ApplicationContext context;
-	@Value("${prezzi.costoCoperto}")
-	@Getter
-	private double costoCoperto ;
 	@Bean
 	@Scope("prototype")
 	public Pizza margherita() {
@@ -177,7 +169,7 @@ public class ConfigMenu {
 	@Bean
 	@Scope("prototype")
 	public Ordine solito(){
-		Ordine f4 = new Ordine((Tavolo)context.getBean("f4"));
+		Ordine f4 = (Ordine) context.getBean("ordine");//(Tavolo)context.getBean("f4"));
 		f4.add((Drink)context.getBean("water"));
 		f4.add((Drink)context.getBean("wine"));
 		f4.add((Pizza)context.getBean("margherita"),"Bruciata");
@@ -185,7 +177,7 @@ public class ConfigMenu {
 		f4.add((Franchise)context.getBean("mug"));
 		f4.add((Franchise)context.getBean("shirt"),"Taglia XL");
 		f4.setStato(Stato.Servito);
-		f4.setConfig(this);
+		f4.setTavolo((Tavolo)context.getBean("f4"));
 		try {
 			f4.setCoperti(2);
 		} catch (MassaZenteException e) {

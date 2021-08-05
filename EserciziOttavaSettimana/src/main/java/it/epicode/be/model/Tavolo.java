@@ -10,4 +10,8 @@ public class Tavolo {
 	private int posti;
 	public enum Stato {occupato, libero};
 	private Stato stato;
+	
+	public Tavolo() {
+		posti=1;
+	}
 }

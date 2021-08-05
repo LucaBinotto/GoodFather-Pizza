@@ -1,5 +1,6 @@
 package it.epicode.be.model;
 
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
@@ -8,12 +9,12 @@ import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import it.epicode.be.config.ConfigMenu;
+import org.springframework.beans.factory.annotation.Value;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
+
 public class Ordine {
 	Logger ordLog = LoggerFactory.getLogger(Ordine.class);
 	
@@ -28,12 +29,25 @@ public class Ordine {
 	@Setter
 	private LocalTime ora;
 	@Setter
-	private ConfigMenu config;
+	private LocalDate data;
+	@Value("${prezzi.costoCoperto}")
+	@Getter
+	@Setter
+	private double costoCoperto;
 	List<MenuItem> pizze = new ArrayList<>();
 	List<MenuItem> drinks = new ArrayList<>();
 	List<MenuItem> franchises = new ArrayList<>();
 
-	public Ordine(Tavolo tavolo) {
+	public Ordine() {
+		this.tavolo = new Tavolo();
+		numeroOrdine = ++ordCounter;
+		stato=Stato.Aperto;
+		coperti=1;
+		ora = LocalTime.now().truncatedTo(ChronoUnit.MINUTES);
+		data = LocalDate.now();
+	}
+	
+	protected Ordine(Tavolo tavolo) {
 		this.tavolo = tavolo;
 		numeroOrdine = ++ordCounter;
 		stato=Stato.Aperto;
@@ -78,8 +92,8 @@ public class Ordine {
 		return franchises.stream().collect(Collectors.summingDouble(MenuItem::getPrice));
 	}
 
-	private double getTotale() {
-		return Math.round(((getTotalePizze() + getTotaleDrinks() + getTotaleFranchises())+coperti*config.getCostoCoperto()) * 100) / 100.0;
+	public double getTotale() {
+		return Math.round(((getTotalePizze() + getTotaleDrinks() + getTotaleFranchises())+coperti*costoCoperto) * 100) / 100.0;
 	}
 	
 	private void stampaPizze() {
@@ -111,13 +125,13 @@ public class Ordine {
 		stampaPizze();
 		stampaDrink();
 		stampaFranchise();
-		ordLog.info("Coperto x"+coperti+"                         \u20ac" + config.getCostoCoperto());
+		ordLog.info("Coperto x"+coperti+"                         \u20ac" + costoCoperto);
 		ordLog.info("TOTALE:                            " + "\u20ac"+getTotale());
 	}
 
 	public void setCoperti(int coperti) throws MassaZenteException {
 		if(tavolo.getPosti()<coperti) {
-			throw new MassaZenteException("Troppe persone");
+			throw new MassaZenteException("Troppe persone"+coperti +" "+ tavolo.getPosti() );
 		}
 		
 		this.coperti = coperti;

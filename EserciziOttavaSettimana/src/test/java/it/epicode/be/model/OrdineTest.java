@@ -3,18 +3,20 @@ package it.epicode.be.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
 import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
+
+
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.slf4j.LoggerFactory;
-
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.ApplicationContext;
 import ch.qos.logback.classic.Level;
 import ch.qos.logback.classic.Logger;
 import ch.qos.logback.classic.spi.ILoggingEvent;
@@ -22,14 +24,17 @@ import ch.qos.logback.core.read.ListAppender;
 import it.epicode.be.model.Ordine.Stato;
 import it.epicode.be.model.topping.Cheese;
 
+
+@SpringBootTest
 class OrdineTest {
-	private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
 	Ordine ord;
 	Tavolo tav;
 	Pizza piz;
 	Drink dri;
 	Franchise fra;
-
+	@Autowired
+	ApplicationContext context ;
+	
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
 	}
@@ -40,10 +45,10 @@ class OrdineTest {
 
 	@BeforeEach
 	void setUp() throws Exception {
-	    System.setOut(new PrintStream(outputStreamCaptor));
 		tav = new Tavolo();
 		tav.setPosti(20);
-		ord = new Ordine(tav);
+		ord = (Ordine) context.getBean("ordine");
+				
 		piz = new Cheese(new BasePizza());
 		dri = new Drink();
 		fra = new Franchise();
@@ -113,24 +118,19 @@ class OrdineTest {
 	void testStampa() {
 		 // get Logback Logger 
         Logger testLogger = (Logger) LoggerFactory.getLogger(Ordine.class);
-
         // create and start a ListAppender
         ListAppender<ILoggingEvent> listAppender = new ListAppender<>();
         listAppender.start();
-
         // add the appender to the logger
         // addAppender is outdated now
         testLogger.addAppender(listAppender);
-
         // call method under test
-
-
+        ord.stampa();
         // JUnit assertions
         List<ILoggingEvent> logsList = listAppender.list;
-        assertEquals("#######################################################################################################################################################", logsList.get(0)
-                                      .getMessage());
-        assertEquals(Level.INFO, logsList.get(0)
-                                         .getLevel());
+        assertEquals("#######################################################################################################################################################", 
+        		logsList.get(0).getMessage());
+        assertEquals(Level.INFO, logsList.get(0).getLevel());
   
 	}
 
@@ -153,8 +153,8 @@ class OrdineTest {
 
 	@Test
 	void testSetCoperti() throws MassaZenteException {
-		ord.setCoperti(17);
-		assertEquals(17, ord.getCoperti());
+		ord.setCoperti(1);
+		assertEquals(1, ord.getCoperti());
 	}
 
 	@Test

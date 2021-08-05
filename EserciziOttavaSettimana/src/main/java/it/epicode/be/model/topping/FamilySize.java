@@ -32,4 +32,17 @@ public class FamilySize extends Topping {
 		}
 	}
 
+	@Override
+	public String getCaloriesSt() {
+		
+		String cal = "x 1.95";
+
+		int a = cal.length();
+		int diff = CAL_LENGTH - a;
+		for (int i = 0; i < diff; i++) {
+			cal += " ";
+		}
+		return cal;
+	}
+
 }
