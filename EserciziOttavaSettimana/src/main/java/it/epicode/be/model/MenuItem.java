@@ -8,6 +8,7 @@ public interface MenuItem {
 	public String getName();
 	public void setName(String name);
 	public void setPrice(double price);
-
+	public String getNota();
+	public void setNota(String nota);
 
 }

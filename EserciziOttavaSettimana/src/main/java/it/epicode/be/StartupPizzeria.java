@@ -10,6 +10,7 @@ import it.epicode.be.model.Ordine;
 import it.epicode.be.model.Drink;
 import it.epicode.be.model.Franchise;
 import it.epicode.be.model.Menu;
+import it.epicode.be.model.MenuItem;
 import it.epicode.be.model.Pizza;
 import it.epicode.be.model.topping.Cheese;
 import it.epicode.be.model.topping.FamilySize;
@@ -33,7 +34,22 @@ public class StartupPizzeria implements CommandLineRunner{
 	public void run(String... args) throws Exception {
 		godfather.stampaMenu();
 		System.out.println();
+		
+		f4.setCoperti(3);
 		f4.stampa();
+		Ordine giorgio = (Ordine) context.getBean("solito");
+		giorgio.setCoperti(4);
+		giorgio.add(new Onions((Pizza) context.getBean("hawaian")));
+		giorgio.stampa();
+//		Pizza marghe = (Pizza) context.getBean("margherita");
+//		
+//		marghe.setName("Cacca");
+//		
+//		Pizza marghe1 = (Pizza) context.getBean("margherita");
+//		
+//		System.out.println(marghe.getName());
+//		System.out.println(marghe1.getName());
+
 	}
 
 }

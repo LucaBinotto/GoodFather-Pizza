@@ -11,7 +11,7 @@ public class Cheese extends Topping {
 
 	@Override
 	public String getTopping() {
-			return tempPizza.getTopping() + ", cheese";
+		return tempPizza.getTopping() + ", cheese";
 	}
 
 	@Override
@@ -21,15 +21,14 @@ public class Cheese extends Topping {
 		} else {
 			return price;
 		}
-
 	}
 
 	@Override
 	public int getCalories() {
-		if (calorie == 0) {
+		if (calories == 0) {
 			return tempPizza.getCalories() + 92;
 		} else {
-			return calorie;
+			return calories;
 		}
 	}
 

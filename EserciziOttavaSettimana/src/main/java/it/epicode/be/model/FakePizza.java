@@ -13,7 +13,8 @@ public class FakePizza implements Pizza {
 	}
 
 	@Override
-	public void setPrice(double price) {	
+	@Deprecated
+	public void setPrice(double price) {
 	}
 
 	@Override
@@ -22,22 +23,37 @@ public class FakePizza implements Pizza {
 	}
 
 	@Override
+	@Deprecated
 	public String stampa() {
-		return null;
+		return "";
 	}
 
 	@Override
+	@Deprecated
 	public String getName() {
-		return null;
+		return "";
 	}
 
 	@Override
-	public void setName(String name) {		
+	@Deprecated
+	public void setName(String name) {
 	}
 
 	@Override
+	@Deprecated
 	public void setCalories(int calorie) {
-		
+
+	}
+
+	@Override
+	@Deprecated
+	public String getNota() {
+		return "";
+	}
+
+	@Override
+	@Deprecated
+	public void setNota(String nota) {
 	}
 
 }

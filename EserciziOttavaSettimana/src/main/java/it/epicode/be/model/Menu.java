@@ -6,22 +6,19 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import lombok.Getter;
+import lombok.Setter;
+
 public class Menu {
 	Logger menLog = LoggerFactory.getLogger(Menu.class);
 	
+	@Getter
+	@Setter
 	private String name;
-	List<MenuItem> pizze = new ArrayList<>();
-	List<MenuItem> toppings = new ArrayList<>();
-	List<MenuItem> drinks = new ArrayList<>();
-	List<MenuItem> franchises = new ArrayList<>();
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
+	private List<MenuItem> pizze = new ArrayList<>();
+	private List<MenuItem> toppings = new ArrayList<>();
+	private List<MenuItem> drinks = new ArrayList<>();
+	private List<MenuItem> franchises = new ArrayList<>();
 
 	public void add(Pizza pizza) {
 		pizze.add(pizza);

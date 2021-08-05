@@ -1,20 +1,24 @@
 package it.epicode.be.model;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
-import java.util.Map;
-
+import java.util.List;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.slf4j.LoggerFactory;
 
+import ch.qos.logback.classic.Level;
+import ch.qos.logback.classic.Logger;
+import ch.qos.logback.classic.spi.ILoggingEvent;
+import ch.qos.logback.core.read.ListAppender;
 import it.epicode.be.model.Ordine.Stato;
 import it.epicode.be.model.topping.Cheese;
 
@@ -38,6 +42,7 @@ class OrdineTest {
 	void setUp() throws Exception {
 	    System.setOut(new PrintStream(outputStreamCaptor));
 		tav = new Tavolo();
+		tav.setPosti(20);
 		ord = new Ordine(tav);
 		piz = new Cheese(new BasePizza());
 		dri = new Drink();
@@ -62,52 +67,71 @@ class OrdineTest {
 	@Test
 	void testAddPizza() {
 		ord.add(piz);
-		Map<MenuItem, String> a = ord.getPizze();
-		assertTrue(a.containsKey(piz));
+		List<MenuItem> a = ord.getPizze();
+		assertTrue(a.contains(piz));
 	}
 
 	@Test
 	void testAddPizzaString() {
 		ord.add(piz, "prova");
-		Map<MenuItem, String> a = ord.getPizze();
-		assertTrue(a.containsKey(piz));
-		assertEquals("prova", a.get(piz));
+		List<MenuItem> a = ord.getPizze();
+		assertTrue(a.contains(piz));
+		assertEquals("\tNota: "+"prova", piz.getNota());
 	}
 
 	@Test
 	void testAddDrink() {
 		ord.add(dri);
-		Map<MenuItem, String> a = ord.getDrinks();
-		assertTrue(a.containsKey(dri));
+		List<MenuItem> a = ord.getDrinks();
+		assertTrue(a.contains(dri));
 	}
 
 	@Test
 	void testAddDrinkString() {
 		ord.add(dri, "prova");
-		Map<MenuItem, String> a = ord.getDrinks();
-		assertTrue(a.containsKey(dri));
-		assertEquals("prova", a.get(dri));
+		List<MenuItem> a = ord.getDrinks();
+		assertTrue(a.contains(dri));
+		assertEquals("\tNota: "+"prova", dri.getNota());
 	}
 
 	@Test
 	void testAddFranchise() {
 		ord.add(fra);
-		Map<MenuItem, String> a = ord.getFranchises();
-		assertTrue(a.containsKey(fra));
+		List<MenuItem> a = ord.getFranchises();
+		assertTrue(a.contains(fra));
 	}
 
 	@Test
 	void testAddFranchiseString() {
 		ord.add(fra, "prova");
-		Map<MenuItem, String> a = ord.getFranchises();
-		assertTrue(a.containsKey(fra));
-		assertEquals("prova", a.get(fra));
+		List<MenuItem> a = ord.getFranchises();
+		assertTrue(a.contains(fra));
+		assertEquals("\tNota: "+"prova", fra.getNota());
 	}
 
 	@Test
 	void testStampa() {
-		ord.stampa();
-		Assertions.assertNotEquals("",outputStreamCaptor.toString().trim());
+		 // get Logback Logger 
+        Logger testLogger = (Logger) LoggerFactory.getLogger(Ordine.class);
+
+        // create and start a ListAppender
+        ListAppender<ILoggingEvent> listAppender = new ListAppender<>();
+        listAppender.start();
+
+        // add the appender to the logger
+        // addAppender is outdated now
+        testLogger.addAppender(listAppender);
+
+        // call method under test
+
+
+        // JUnit assertions
+        List<ILoggingEvent> logsList = listAppender.list;
+        assertEquals("#######################################################################################################################################################", logsList.get(0)
+                                      .getMessage());
+        assertEquals(Level.INFO, logsList.get(0)
+                                         .getLevel());
+  
 	}
 
 	@Test
@@ -128,7 +152,7 @@ class OrdineTest {
 	}
 
 	@Test
-	void testSetCoperti() {
+	void testSetCoperti() throws MassaZenteException {
 		ord.setCoperti(17);
 		assertEquals(17, ord.getCoperti());
 	}

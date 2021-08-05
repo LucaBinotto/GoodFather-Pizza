@@ -1,9 +1,12 @@
 package it.epicode.be.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 import it.epicode.be.model.BasePizza;
 import it.epicode.be.model.Ordine;
@@ -11,6 +14,7 @@ import it.epicode.be.model.Ordine.Stato;
 import it.epicode.be.model.Drink;
 import it.epicode.be.model.FakePizza;
 import it.epicode.be.model.Franchise;
+import it.epicode.be.model.MassaZenteException;
 import it.epicode.be.model.Menu;
 import it.epicode.be.model.Pizza;
 import it.epicode.be.model.Tavolo;
@@ -21,22 +25,26 @@ import it.epicode.be.model.topping.Ham;
 import it.epicode.be.model.topping.Onions;
 import it.epicode.be.model.topping.Pineapple;
 import it.epicode.be.model.topping.Salami;
+import lombok.Getter;
 
 @Configuration
+@Component
 public class ConfigMenu {
 	
 	@Autowired
 	private ApplicationContext context;
-	
-	public static final int COSTO_COPERTO = 2;
-	
+	@Value("${prezzi.costoCoperto}")
+	@Getter
+	private double costoCoperto ;
 	@Bean
+	@Scope("prototype")
 	public Pizza margherita() {
 		Pizza a =  new Cheese(new BasePizza());
 		a.setName("Margherita");
 		return a;
 	}
 	@Bean
+	@Scope("prototype")
 	public Pizza hawaian() {
 		Pizza a = new Pineapple(new Ham(new Cheese(new BasePizza())));
 		a.setName("Hawaian Pizza");
@@ -45,6 +53,7 @@ public class ConfigMenu {
 		return a;
 	}
 	@Bean
+	@Scope("prototype")
 	public Pizza salamiPizza() {
 		Pizza a = new Salami(new Cheese(new BasePizza()));
 		a.setName("Salami Pizza");
@@ -53,6 +62,7 @@ public class ConfigMenu {
 		return a;
 	}
 	@Bean
+	@Scope("prototype")
 	public Drink lemonade() {
 		Drink a = new Drink();
 		a.setName("Lemonade");
@@ -63,6 +73,7 @@ public class ConfigMenu {
 		return a;
 	}
 	@Bean
+	@Scope("prototype")
 	public Drink water() {
 		Drink a = new Drink();
 		a.setName("Water");
@@ -73,6 +84,7 @@ public class ConfigMenu {
 		return a;
 	}
 	@Bean
+	@Scope("prototype")
 	public Drink wine() {
 		Drink a = new Drink();
 		a.setName("Wine");
@@ -82,42 +94,49 @@ public class ConfigMenu {
 		return a;
 	}
 	@Bean
+	@Scope("singleton")
 	public Topping cheese() {
 		Topping a =  new Cheese(new FakePizza());
 		a.setName("Cheese");
 		return a;
 	}
 	@Bean
+	@Scope("singleton")
 	public Topping ham() {
 		Topping a =  new Ham(new FakePizza());
 		a.setName("Ham");
 		return a;
 	}
 	@Bean
+	@Scope("singleton")
 	public Topping onions() {
 		Topping a =  new Onions(new FakePizza());
 		a.setName("Onions");
 		return a;
 	}
 	@Bean
+	@Scope("singleton")
 	public Topping pineapple() {
 		Topping a =  new Pineapple(new FakePizza());
 		a.setName("Pineapple");
 		return a;
 	}
 	@Bean
+	@Scope("singleton")
 	public Topping salami() {
 		Topping a =  new Salami(new FakePizza());
 		a.setName("Salami");
 		return a;
 	}
 	@Bean
+	@Scope("singleton")
 	public Topping maxi() {
 		Topping a =  new FamilySize(new FakePizza());
 		a.setName("Family Size");
 		return a;
 	}
 	@Bean
+	@Scope("prototype")
 	public Franchise shirt() {
 		Franchise a = new Franchise();
 		a.setName("Shirt");
@@ -125,6 +144,7 @@ public class ConfigMenu {
 		return a;
 	}
 	@Bean
+	@Scope("prototype")
 	public Franchise mug() {
 		Franchise a = new Franchise();
 		a.setName("Mug");
@@ -132,6 +152,7 @@ public class ConfigMenu {
 		return a;
 	}
 	@Bean
+	@Scope("singleton")
 	public Menu godfather() {
 		Menu men = new Menu();
 		men.setName("Godfather's Pizza");
@@ -154,16 +175,22 @@ public class ConfigMenu {
 	}
 	
 	@Bean
-	public Ordine solito() {
+	@Scope("prototype")
+	public Ordine solito(){
 		Ordine f4 = new Ordine((Tavolo)context.getBean("f4"));
 		f4.add((Drink)context.getBean("water"));
 		f4.add((Drink)context.getBean("wine"));
-		f4.add((Pizza)context.getBean("margherita"));
+		f4.add((Pizza)context.getBean("margherita"),"Bruciata");
 		f4.add(new FamilySize(new Pineapple(new Cheese(new Ham(new Onions( new Salami(new BasePizza())))))), "Ananas dopo cottura");
 		f4.add((Franchise)context.getBean("mug"));
 		f4.add((Franchise)context.getBean("shirt"),"Taglia XL");
 		f4.setStato(Stato.Servito);
-		f4.setCoperti(2);
+		f4.setConfig(this);
+		try {
+			f4.setCoperti(2);
+		} catch (MassaZenteException e) {
+			e.printStackTrace();
+		}
 		return f4;
 	}
 	

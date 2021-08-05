@@ -1,21 +1,25 @@
 package it.epicode.be.model;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Setter
 public abstract class Topping implements Pizza {
-	
+
 	protected String topping;
 	protected Pizza tempPizza;
 	protected double price = 0;
 	protected String name = "";
-	protected int calorie = 0;
+	protected int calories = 0;
+	@Getter
+	protected String nota = "";
 
 	public Topping(Pizza pizza) {
 		tempPizza = pizza;
-
 	}
 
 	@Override
 	public String getTopping() {
-
 		return tempPizza.getTopping();
 	}
 
@@ -29,17 +33,11 @@ public abstract class Topping implements Pizza {
 	}
 
 	@Override
-	public void setCalories(int calorie) {
-		this.calorie = calorie;
-	}
-
-	@Override
 	public int getCalories() {
-		if (calorie == 0) {
-			calorie = tempPizza.getCalories();
-		} 
-			return calorie;
-		
+		if (calories == 0) {
+			calories = tempPizza.getCalories();
+		}
+		return calories;
 
 	}
 
@@ -53,9 +51,7 @@ public abstract class Topping implements Pizza {
 
 			} else {
 				return getName() + getCaloriesSt() + "\u20ac" + getPrice() + "\t";
-
 			}
-
 		}
 	}
 
@@ -70,16 +66,9 @@ public abstract class Topping implements Pizza {
 			name += " ";
 		}
 		return name;
-
 	}
-
-	@Override
-	public void setPrice(double price) {
-		this.price = price;
-	}
-
-	@Override
-	public void setName(String name) {
-		this.name = name;
+	
+	public void setNota(String nota) {
+		this.nota="\tNota: "+nota;
 	}
 }
