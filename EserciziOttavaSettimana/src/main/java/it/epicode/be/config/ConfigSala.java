@@ -3,6 +3,7 @@ package it.epicode.be.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import it.epicode.be.model.Sala;
 import it.epicode.be.model.Tavolo;
 import it.epicode.be.model.Tavolo.Stato;
 
@@ -40,6 +41,15 @@ public class ConfigSala {
 		tav.setPosti(4);
 		tav.setStato(Stato.libero);
 		return tav;
+	}
+	@Bean
+	public Sala sala() {
+		Sala sala = new Sala();
+		sala.add(f1());
+		sala.add(f2());
+		sala.add(f3());
+		sala.add(f4());
+		return sala;
 	}
 	
 }

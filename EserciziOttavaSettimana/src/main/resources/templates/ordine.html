@@ -46,7 +46,7 @@ section {
         <td th:text="${reg.getOrdine(__${co}__).stato}"></td>
         <td th:text="${reg.getOrdine(__${co}__).getTotale()}"></td>
         <td> <section>	<form action="updateStato" method = "post">
-        		<input type="radio" name="stato" value="Aperto" >Aperto
+        		<input type="radio" name="stato" value="Aperto" checked >Aperto
         		<input type="radio" name="stato" value="Pronto" >Pronto
 				<input type="radio" name="stato" value="Servito">Servito
 				<input type="submit" value="Cambio">
