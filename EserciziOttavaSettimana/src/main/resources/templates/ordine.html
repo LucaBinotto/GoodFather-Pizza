@@ -55,7 +55,49 @@ section {
 				</section>
 				</td>
       </tr>
-    </table>      
+    </table>
+    
+    <table>
+       <tr>
+        <th th:if="${!reg.getOrdine(__${co}__).pizze.isEmpty()}">Pizza</th>
+        <th th:if="${!reg.getOrdine(__${co}__).pizze.isEmpty()}">Ingredienti</th>
+        <th th:if="${!reg.getOrdine(__${co}__).pizze.isEmpty()}">Calorie</th>
+        <th th:if="${!reg.getOrdine(__${co}__).pizze.isEmpty()}">Prezzo</th>
+      </tr>
+       <tr th:each="pizza : ${reg.getOrdine(__${co}__).pizze}">
+        <td th:text="${pizza.getName}"></td>
+        <td th:text="${pizza.getTopping}"></td>
+        <td th:text="${pizza.getCaloriesSt}"></td>
+        <td th:text="${pizza.getPrice}"></td>
+      </tr>
+       <tr>
+        <th th:if="${!reg.getOrdine(__${co}__).getDrinks.isEmpty()}">Drink</th>
+        <th th:if="${!reg.getOrdine(__${co}__).getDrinks.isEmpty()}"></th>
+        <th th:if="${!reg.getOrdine(__${co}__).getDrinks.isEmpty()}">Calorie</th>
+        <th th:if="${!reg.getOrdine(__${co}__).getDrinks.isEmpty()}">Prezzo</th>
+      </tr>
+      <tr th:each="dri : ${reg.getOrdine(__${co}__).getDrinks}">
+        <td th:text="${dri.getName}"></td>
+        <td th:text="${dri.getDescription}"></td>
+        <td th:text="${dri.getCaloriesSt}"></td>
+        <td th:text="${dri.getPrice}"></td>
+      </tr>
+       <tr>
+        <th th:if="${!reg.getOrdine(__${co}__).getFranchises.isEmpty()}">Merchandise</th>
+        <th th:if="${!reg.getOrdine(__${co}__).getFranchises.isEmpty()}"></th>
+        <th th:if="${!reg.getOrdine(__${co}__).getFranchises.isEmpty()}"></th>
+        <th th:if="${!reg.getOrdine(__${co}__).getFranchises.isEmpty()}">Prezzo</th>
+      </tr>
+      <tr th:each="fran : ${reg.getOrdine(__${co}__).getFranchises}">
+        <td th:text="${fran.getName}"></td>
+        <td></td>
+        <td></td>
+        <td th:text="${fran.getPrice}"></td>
+      </tr>
+    </table>
+    
+    
+          
           <br>
    
  <a href="http://localhost:8080/home" class="button">HOME</a>

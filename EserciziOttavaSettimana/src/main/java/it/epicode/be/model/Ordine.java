@@ -33,7 +33,6 @@ public class Ordine {
 	@Setter
 	private LocalDate data;
 	@Value("${prezzi.costoCoperto}")
-	@Getter
 	@Setter
 	private double costoCoperto;
 	List<MenuItem> pizze = new ArrayList<>();
@@ -47,6 +46,7 @@ public class Ordine {
 		coperti=1;
 		ora = LocalTime.now().truncatedTo(ChronoUnit.MINUTES);
 		data = LocalDate.now();
+		
 	}
 	
 	protected Ordine(Tavolo tavolo) {
