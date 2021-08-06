@@ -165,6 +165,26 @@ public class ConfigMenu {
 
 		return men;
 	}
+	@Bean
+	@Scope("singleton")
+	public Menu ciccio() {
+		Menu men = new Menu();
+		men.setName("Godfather's Pizza");
+		men.add(margherita());
+		men.add(hawaian());
+		men.add(salamiPizza());
+		men.add(cheese());
+		men.add(ham());
+		men.add(onions());
+		men.add(pineapple());
+		men.add(salami());
+		men.add(maxi());
+		
+		men.add(shirt());
+		men.add(mug());
+
+		return men;
+	}
 	
 	@Bean
 	@Scope("prototype")

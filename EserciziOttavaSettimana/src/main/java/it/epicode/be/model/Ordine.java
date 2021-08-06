@@ -10,11 +10,13 @@ import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
+
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
-
+@Component
 public class Ordine {
 	Logger ordLog = LoggerFactory.getLogger(Ordine.class);
 	

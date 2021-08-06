@@ -1,0 +1,50 @@
+<html>
+
+<head>
+<link type="image/x-icon" href="/favicon.ico" rel="shortcut icon">
+	<style>
+		table,
+		th,
+		td {
+			border: 1px solid black;
+			border-collapse: collapse;
+			text-align: left;
+			background-color: rgb(255, 128, 0);
+		}
+
+		.button {
+			font: bold 11px Arial;
+			text-decoration: none;
+			background-color: #EEEEEE;
+			color: #333333;
+			padding: 2px 6px 2px 6px;
+			border-top: 1px solid #CCCCCC;
+			border-right: 1px solid #333333;
+			border-bottom: 1px solid #333333;
+			border-left: 1px solid #CCCCCC;
+		}
+	</style>
+</head>
+
+<body style="background-color: rgb(250, 189, 5)">
+	<h2>Nuovo Ordine</h2>
+	<form action="#" th:action="@{/aggiungiOrdine}" th:object="${ordine}" method="POST">
+		<section>
+        	<input type="radio" th:field="*{stato}" value="Aperto" >Aperto
+        	<input type="radio" th:field="*{stato}" value="Pronto" >Pronto
+			<input type="radio" th:field="*{stato}" value="Servito">Servito
+		</section>
+		<input type="text" th:field="*{ora}">
+		<input type="text" th:field="*{data}">
+	<input type="submit" value="Conferma">
+		
+	</form>
+
+
+
+
+
+ <a href="http://localhost:8080/home" class="button">HOME</a>
+</body>
+
+</html>

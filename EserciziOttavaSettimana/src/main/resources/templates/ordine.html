@@ -1,5 +1,8 @@
 <html>
 <style>
+*{
+	margin:0;
+}
 	table, th, td {
   border: 1px solid black;
   border-collapse: collapse;
@@ -18,8 +21,12 @@
   border-left: 1px solid #CCCCCC;
 }
 
+section {
+	margin-block-end:0px;
+}
+
 </style>
-	<body style="background-color: rgb(250, 189, 5)">
+	<body style="background-color: rgb(250, 189, 5); margin:10px">
 		<h1>Godfather's Pizza</h1>
 		<h2>Ordine <span th:text="${reg.getOrdine(__${co}__).numeroOrdine}">d</span></h2>
                  
@@ -38,13 +45,15 @@
         <td th:text="${reg.getOrdine(__${co}__).coperti}"></td>
         <td th:text="${reg.getOrdine(__${co}__).stato}"></td>
         <td th:text="${reg.getOrdine(__${co}__).getTotale()}"></td>
-        <td >	<form action="updateStato" method = "get">
+        <td> <section>	<form action="updateStato" method = "post">
         		<input type="radio" name="stato" value="Aperto" >Aperto
         		<input type="radio" name="stato" value="Pronto" >Pronto
 				<input type="radio" name="stato" value="Servito">Servito
-				<input type="submit" value="Cambio"></td>
-				<input type="hidden" name="codiceOrdine" th:value="${reg.getOrdine(__${co}__).numeroOrdine}"></td>
+				<input type="submit" value="Cambio">
+				<input type="hidden" name="codiceOrdine" th:value="${co}">
 				</form>
+				</section>
+				</td>
       </tr>
     </table>      
           <br>
