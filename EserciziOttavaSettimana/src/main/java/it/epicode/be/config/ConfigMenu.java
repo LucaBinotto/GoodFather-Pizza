@@ -1,6 +1,7 @@
 package it.epicode.be.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -22,9 +23,17 @@ import it.epicode.be.model.topping.Ham;
 import it.epicode.be.model.topping.Onions;
 import it.epicode.be.model.topping.Pineapple;
 import it.epicode.be.model.topping.Salami;
+import lombok.Getter;
+import lombok.Setter;
 
 @Configuration
 public class ConfigMenu {
+	
+//	@Value("${prezzi.costoCoperto}")
+//	@Setter
+//	@Getter
+//	private String prezzoMargherita;
+//	
 	
 	@Autowired
 	private ApplicationContext context;
@@ -32,6 +41,8 @@ public class ConfigMenu {
 	@Scope("prototype")
 	public Pizza margherita() {
 		Pizza a =  new Cheese(new BasePizza());
+//		double pr = Double.parseDouble(prezzoMargherita);
+//		a.setPrice(pr);
 		a.setName("Margherita");
 		return a;
 	}

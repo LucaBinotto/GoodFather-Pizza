@@ -9,6 +9,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -31,6 +32,12 @@ public class PizzeriaController {
 	private Sala sala;
 	
 
+	private String ritornaListaOrdini(Map<String,Object> model) {
+		model.put("reg", reg);
+		return "listaOrdini";
+	}
+	
+	
 	@GetMapping("/menu")
 	public String menu(Map<String,Object> model) {
 		model.put("menu", menu);
@@ -50,8 +57,7 @@ public class PizzeriaController {
 	
 	@GetMapping("/ordini")
 	public String ordini(Map<String,Object> model) {
-		model.put("reg", reg);
-		return "listaOrdini";
+		return ritornaListaOrdini(model);
 	}
 		
 	@GetMapping("/getOrdine")
@@ -71,12 +77,16 @@ public class PizzeriaController {
 	
 	
 	@RequestMapping(value="/updateStato", method=RequestMethod.POST)
-	public String updatep(Map<String,Object> model,@RequestParam("stato") String stato,@RequestParam("codiceOrdine") String codiceOrdine) {
-		model.put("reg", reg);
+	public String updatep(Map<String,Object> model,@RequestParam("stato") String stato,@RequestParam("codiceOrdine") String codiceOrdine,@ModelAttribute("ordine") Ordine ordine) {
+		
+		System.out.println(ordine.getNumeroOrdine());
+		System.out.println(ordine.getCodiceTavolo());
+		System.out.println(ordine.getCoperti());
+		
+		
 		long codOrd = Long.parseLong(codiceOrdine);
 		reg.getOrdine(codOrd).setStato(Stato.valueOf(stato));
-		return "listaOrdini";
-		
+		return ritornaListaOrdini(model);
 	}
 	
 	@RequestMapping(value="/aggiungiOrdine", method=RequestMethod.POST)
