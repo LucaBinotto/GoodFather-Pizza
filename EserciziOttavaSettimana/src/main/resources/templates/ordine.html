@@ -67,7 +67,7 @@
 		<tr th:each="pizza : ${reg.getOrdine(__${co}__).pizze}">
 			<td th:text="${pizza.getName}"></td>
 			<td th:text="${pizza.getTopping}"></td>
-			<td th:text="${pizza.getCaloriesSt}"></td>
+			<td th:text="${pizza.getCalories}"></td>
 			<td th:text="${pizza.getPrice}"></td>
 		</tr>
 		<tr>
@@ -79,7 +79,7 @@
 		<tr th:each="dri : ${reg.getOrdine(__${co}__).getDrinks}">
 			<td th:text="${dri.getName}"></td>
 			<td th:text="${dri.getDescription}"></td>
-			<td th:text="${dri.getCaloriesSt}"></td>
+			<td th:text="${dri.getCalories}"></td>
 			<td th:text="${dri.getPrice}"></td>
 		</tr>
 		<tr>
