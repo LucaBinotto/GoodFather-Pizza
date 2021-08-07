@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.Scope;
 import it.epicode.be.model.BasePizza;
 import it.epicode.be.model.Drink;
@@ -155,6 +156,7 @@ public class ConfigMenu {
 		return a;
 	}
 	@Bean
+	@Primary
 	@Scope("singleton")
 	public Menu godfather() {
 		Menu men = new Menu();
@@ -177,6 +179,7 @@ public class ConfigMenu {
 		return men;
 	}
 	@Bean
+	
 	@Scope("singleton")
 	public Menu ciccio() {
 		Menu men = new Menu();
@@ -198,6 +201,7 @@ public class ConfigMenu {
 	}
 	
 	@Bean
+	
 	@Scope("prototype")
 	public Ordine solito(){
 		Ordine f4 = (Ordine) context.getBean("ordine");//(Tavolo)context.getBean("f4"));

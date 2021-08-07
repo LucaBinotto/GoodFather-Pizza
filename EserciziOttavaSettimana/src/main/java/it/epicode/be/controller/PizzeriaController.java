@@ -24,8 +24,9 @@ import it.epicode.be.model.Sala;
 @Controller
 public class PizzeriaController {
 	@Autowired
-	ApplicationContext context = new AnnotationConfigApplicationContext(ConfigMenu.class);
-	Menu menu = (Menu) context.getBean("godfather");
+	ApplicationContext context ;//= new AnnotationConfigApplicationContext(ConfigMenu.class);
+	@Autowired
+	Menu menu;
 	@Autowired
 	private RegistroOrdini reg;
 	@Autowired
@@ -77,11 +78,11 @@ public class PizzeriaController {
 	
 	
 	@RequestMapping(value="/updateStato", method=RequestMethod.POST)
-	public String updatep(Map<String,Object> model,@RequestParam("stato") String stato,@RequestParam("codiceOrdine") String codiceOrdine,@ModelAttribute("ordine") Ordine ordine) {
+	public String updatep(Map<String,Object> model,@RequestParam("stato") String stato,@RequestParam("codiceOrdine") String codiceOrdine/*,@ModelAttribute("ordine") Ordine ordine*/) {
 		
-		System.out.println(ordine.getNumeroOrdine());
-		System.out.println(ordine.getCodiceTavolo());
-		System.out.println(ordine.getCoperti());
+//		System.out.println(ordine.getNumeroOrdine());
+//		System.out.println(ordine.getCodiceTavolo());
+//		System.out.println(ordine.getCoperti());
 		
 		
 		long codOrd = Long.parseLong(codiceOrdine);
