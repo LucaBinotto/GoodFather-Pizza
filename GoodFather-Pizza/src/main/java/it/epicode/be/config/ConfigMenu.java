@@ -188,7 +188,7 @@ public class ConfigMenu {
 	@Scope("singleton")
 	public Menu godfather() {
 		Menu men = new Menu();
-		men.setName("Godfather's Pizza");
+		men.setName("Goodfather's Pizza");
 		men.add(margherita());
 		men.add(hawaian());
 		men.add(salamiPizza());
@@ -212,7 +212,7 @@ public class ConfigMenu {
 	@Scope("singleton")
 	public Menu ciccio() {
 		Menu men = new Menu();
-		men.setName("Godfather's Pizza");
+		men.setName("Goodfather's Pizza");
 		men.add(margherita());
 		men.add(hawaian());
 		men.add(salamiPizza());
