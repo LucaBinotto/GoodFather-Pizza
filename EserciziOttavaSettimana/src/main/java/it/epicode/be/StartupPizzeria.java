@@ -8,6 +8,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
+import it.epicode.be.config.ConfigMenu;
 import it.epicode.be.model.BasePizza;
 import it.epicode.be.model.Ordine;
 import it.epicode.be.model.Drink;
@@ -66,7 +67,8 @@ public class StartupPizzeria implements CommandLineRunner {
 		reg.add(f4);
 		reg.add(giorgio);
 		reg.add(ezio);
-
+		
+		
 //		Pizza marghe = (Pizza) context.getBean("margherita");
 //		
 //		marghe.setName("Cacca");

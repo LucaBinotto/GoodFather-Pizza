@@ -2,12 +2,13 @@ package it.epicode.be.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Component;
 
 import it.epicode.be.model.Sala;
 import it.epicode.be.model.Tavolo;
 import it.epicode.be.model.Tavolo.Stato;
-
 @Configuration
+@Component
 public class ConfigSala {
 		
 	@Bean

@@ -3,7 +3,10 @@ package it.epicode.be.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.stereotype.Component;
+
 import lombok.Getter;
+@Component
 
 public class Sala {
 	@Getter
